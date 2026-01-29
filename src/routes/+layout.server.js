@@ -41,7 +41,7 @@ export async function load({ fetch, params }) {
 		}
 	];
 	const res = await fetch(`${base_url}datasets`);
-	console.log(`${base_url}datasets`);
+	// console.log(`${base_url}datasets`);
 	const datasets = await res.json();
 
 	return { datasets: datasets, count: Object.keys(datasets).length, stats: stats };
