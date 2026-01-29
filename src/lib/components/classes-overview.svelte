@@ -1,6 +1,5 @@
 <script>
     import * as Card from '$lib/components/ui/card/index.js';
-	import { UserIcon, UsersIcon, MapIcon, BookOpenIcon } from 'lucide-svelte';
 	import EntityTypeIcon from './entity-type-icon.svelte';
 
 	let { stats } = $props()
