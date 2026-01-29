@@ -7,7 +7,7 @@
     let entity_links = [
         {
             icon: "user",
-            link: "person",
+            link: "persons",
         },
         {
             icon: "users",
