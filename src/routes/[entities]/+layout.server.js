@@ -4,10 +4,10 @@ import { entityConfig } from '$lib/constants.js';
 export async function load({ fetch, params, url }) {
     let query_string = new URLSearchParams(Object.fromEntries(url.searchParams));
     if (!query_string.has('size')) {
-        query_string.set('size', '20');
+        query_string.set('size', '15');
     }
-    const entity = params.entities
-    const { base_url, label } = entityConfig[params.entities];
+    // @ts-ignore
+    const { base_url, label, link, entity } = entityConfig[params.entities];
     const fetch_data_url = `${base_url}${query_string && query_string.toString() ? '?' + query_string.toString() : ''}`;
     const res = await fetch(fetch_data_url);
 	const payload = await res.json();
@@ -25,6 +25,6 @@ export async function load({ fetch, params, url }) {
         payload["previous_page"] = `${url.origin}${url.pathname}?${prevParams.toString()}`;
     }
     payload["fetch_data_url"] = fetch_data_url
-    // console.log(payload)
-	return { label, payload  };
+    console.log(payload)
+	return { label, payload, entity  };
 }
