@@ -1,11 +1,13 @@
 <script>
 	let { data } = $props();
     import ClassesOverview from '$lib/components/classes-overview.svelte';
+	import MyBreadcrumb from '$lib/components/my-breadcrumb.svelte';
 </script>
 
 <svelte:head>
 	<title>PFP</title>
 </svelte:head>
+<MyBreadcrumb bcLabel={false}></MyBreadcrumb>
 <div class="p-3 text-center xl:mx-20 2xl:mx-80">
 	<h1 class="p-3 text-5xl font-bold">PFP</h1>
 	<h2 class="p-2 text-2xl font-medium md:text-3xl">A Prosopographical Research Platform</h2>

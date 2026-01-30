@@ -21,7 +21,7 @@ export const entityConfig = {
     groups: {
         base_url: `${appConfig.base_url}groups`,
         label: "Groups",
-        link: "/persons",
+        link: "/groups",
         entity: true
     },
     works: {
