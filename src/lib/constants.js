@@ -8,18 +8,32 @@ export const appConfig = {
 export const entityConfig = {
     persons: {
         base_url: `${appConfig.base_url}persons`,
-        label: "Persons"
+        label: "Persons",
+        link: "/persons",
+        entity: true
     },
     places: {
         base_url: `${appConfig.base_url}places`,
-        label: "Places"
+        label: "Places",
+        link: "/places",
+        entity: true
     },
     groups: {
         base_url: `${appConfig.base_url}groups`,
-        label: "Groups"
+        label: "Groups",
+        link: "/persons",
+        entity: true
     },
     works: {
         base_url: `${appConfig.base_url}works`,
-        label: "Works"
+        label: "Works",
+        link: "/works",
+        entity: true
+    },
+    datasets: {
+        base_url: `${appConfig.base_url}datasets`,
+        label: "Datasets",
+        link: "/datasets",
+        entity: false
     },
 }

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import { Button } from '$lib/components/ui/button';
@@ -6,7 +6,7 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import { SearchIcon, MenuIcon, Github } from 'lucide-svelte';
 
-	let { children } = $props();
+	let { children, data } = $props();
 	import SunIcon from '@lucide/svelte/icons/sun';
 	import MoonIcon from '@lucide/svelte/icons/moon';
 
@@ -37,9 +37,9 @@
 			<div
 				class="flex flex-1 items-center gap-8 font-medium text-muted-foreground max-md:hidden lg:gap-16"
 			>
-				{#each simple_nav_items as x}
-					<a href={x.href} class="hover:text-primary">
-						{x.label}
+				{#each Object.entries(data.entityConfig) as [key, value] (key)}
+					<a href={value.link} class="hover:text-primary">
+						{value.label}
 					</a>
 				{/each}
 			</div>
@@ -51,10 +51,10 @@
 				</Button>
 				<Button onclick={toggleMode} variant="ghost" size="icon">
 					<SunIcon
-						class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 !transition-all dark:scale-0 dark:-rotate-90"
+						class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all! dark:scale-0 dark:-rotate-90"
 					/>
 					<MoonIcon
-						class="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 !transition-all dark:scale-100 dark:rotate-0"
+						class="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all! dark:scale-100 dark:rotate-0"
 					/>
 					<span class="sr-only">Toggle theme</span>
 				</Button>
@@ -68,9 +68,9 @@
 						{/snippet}
 					</DropdownMenu.Trigger>
 					<DropdownMenu.Content class="w-56" align="end">
-						{#each simple_nav_items as x}
+						{#each Object.entries(data.entityConfig) as [key, value] (key)}
 							<DropdownMenu.Item>
-								<a href={x.href}>{x.label}</a>
+								<a href={value.link}>{value.label}</a>
 							</DropdownMenu.Item>
 						{/each}
 					</DropdownMenu.Content>

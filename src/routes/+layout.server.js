@@ -1,4 +1,4 @@
-import { appConfig } from '$lib/constants.js';
+import { appConfig, entityConfig } from '$lib/constants.js';
 
 let base_url = appConfig.base_url;
 
@@ -41,8 +41,7 @@ export async function load({ fetch, params }) {
 		}
 	];
 	const res = await fetch(`${base_url}datasets`);
-	// console.log(`${base_url}datasets`);
 	const datasets = await res.json();
 
-	return { datasets: datasets, count: Object.keys(datasets).length, stats: stats };
+	return { datasets: datasets, count: Object.keys(datasets).length, stats: stats, entityConfig:entityConfig };
 }
