@@ -2,7 +2,7 @@ export const appConfig = {
     title: "PFP-Frontend",
     title_short: "PFP",
     base_url: "https://pfp-api.acdh-dev.oeaw.ac.at/",
-    code_repo_url: "https://github.com/csae8092/pfp-frontend"
+    code_repo_url: "https://github.com/csae8092/pfp-frontend-shadcn"
 }
 
 export const entityConfig = {

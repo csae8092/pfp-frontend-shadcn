@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
 	import * as Breadcrumb from '$lib/components/ui/breadcrumb/index.js';
     import EntityTypeIcon from '$lib/components/entity-type-icon.svelte';
 	let { data, params } = $props();
