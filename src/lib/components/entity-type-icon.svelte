@@ -2,11 +2,11 @@
 import {  UserIcon, UsersIcon, MapIcon, BookOpenIcon, Database } from 'lucide-svelte';
 
 const icons = {
-    'user': UserIcon,
-    'users': UsersIcon,
-    'map': MapIcon,
-    'book': BookOpenIcon,
-    'dataset': Database
+    'persons': UserIcon,
+    'groups': UsersIcon,
+    'places': MapIcon,
+    'works': BookOpenIcon,
+    'datasets': Database
 }
 
 type EntityType = keyof typeof icons

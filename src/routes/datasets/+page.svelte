@@ -4,25 +4,6 @@
 	let { data } = $props();
     import EntityTypeIcon from '$lib/components/entity-type-icon.svelte';
 
-    let entity_links = [
-        {
-            icon: "user",
-            link: "persons",
-        },
-        {
-            icon: "users",
-            link: "groups"
-        },
-        {
-            icon: "map",
-            link: "places"
-        },
-        {
-            icon: "book",
-            link: "works"
-        },
-    ]
-
 </script>
 
 <svelte:head>
@@ -43,9 +24,9 @@
 			</Card.Header>
 			<Card.Content>
 				<div class="flex justify-center items-center gap-x-1">
-                    {#each entity_links as y }
+                    {#each Object.entries(data.entityConfig) as [key, value] (key)}
                         <div>
-                        <Button href={`/${y.link}?datasets=${x.uri}`} aria-label={ y.link}><EntityTypeIcon type={y.icon} /> </Button>
+                        <Button href={`/${value.link}?datasets=${x.uri}`} aria-label={ value.link}><EntityTypeIcon type={key} /> </Button>
                     </div>
                     {/each}
 				</div>

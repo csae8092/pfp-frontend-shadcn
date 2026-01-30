@@ -9,14 +9,10 @@
 	let { children, data } = $props();
 	import SunIcon from '@lucide/svelte/icons/sun';
 	import MoonIcon from '@lucide/svelte/icons/moon';
+	import EntityTypeIcon from '$lib/components/entity-type-icon.svelte';
 
 	import { toggleMode } from 'mode-watcher';
 
-	let simple_nav_items = [
-		{ label: 'Datasets', href: '/datasets' },
-		{ label: 'About', href: '/about' },
-		{ label: 'SPARQL', href: 'https://qlever-ui.acdh-dev.oeaw.ac.at/' }
-	];
 </script>
 
 <ModeWatcher />
@@ -30,7 +26,7 @@
 	<header class="sticky top-0 z-50 bg-background">
 		<div class="max-w-10xl mx-auto flex items-center justify-between gap-8 px-4 py-7 sm:px-6">
 			<div
-				class="flex flex-1 items-center justify-start gap-8 font-medium text-foreground lg:gap-16"
+				class="flex flex-1 items-center justify-between gap-8 font-medium text-foreground lg:gap-16"
 			>
 				<a href="/" class="hover:text-primary"> PFP </a>
 			</div>
@@ -39,7 +35,7 @@
 			>
 				{#each Object.entries(data.entityConfig) as [key, value] (key)}
 					<a href={value.link} class="hover:text-primary">
-						{value.label}
+						<div class="flex gap-1"><EntityTypeIcon type={key}></EntityTypeIcon>{value.label}</div>
 					</a>
 				{/each}
 			</div>
@@ -67,10 +63,12 @@
 							</Button>
 						{/snippet}
 					</DropdownMenu.Trigger>
-					<DropdownMenu.Content class="w-56" align="end">
+					<DropdownMenu.Content >
 						{#each Object.entries(data.entityConfig) as [key, value] (key)}
 							<DropdownMenu.Item>
-								<a href={value.link}>{value.label}</a>
+								<a href={value.link}>
+									<div class="flex gap-1"><EntityTypeIcon type={key}></EntityTypeIcon>{value.label}</div>
+								</a>
 							</DropdownMenu.Item>
 						{/each}
 					</DropdownMenu.Content>

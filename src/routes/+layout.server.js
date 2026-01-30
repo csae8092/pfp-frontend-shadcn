@@ -8,35 +8,35 @@ export async function load({ fetch, params }) {
 			label: 'Persons',
 			link: '/persons',
 			amount: 2345432,
-			icon: 'user',
+			icon: 'persons',
 			description: "This class comprises real persons. "
 		},
 		{
 			label: 'Places',
 			link: '/places',
 			amount: 251001,
-			icon: 'map',
+			icon: 'places',
 			description: "Places are physical locations that are associated with one or more resources in the PFP dataset."
 		},
 		{
 			label: 'Groups',
 			link: '/groups',
 			amount: 1653147,
-			icon: 'users',
+			icon: 'groups',
 			description: "Groups are collections of persons or places that share common characteristics or are associated in some way."
 		},
 		{
 			label: 'Works',
 			link: '/works',
 			amount: 1653147,
-			icon: 'book',
+			icon: 'works',
 			description: "Works are creative or intellectual productions associated with persons or groups."
 		},
 		{
 			label: 'Datasets',
 			link: '/datasets',
 			amount: 10,
-			icon: 'dataset',
+			icon: 'datasets',
 			description: "Data providers."
 		}
 	];
