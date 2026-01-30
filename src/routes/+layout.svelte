@@ -12,6 +12,7 @@
 	import EntityTypeIcon from '$lib/components/entity-type-icon.svelte';
 
 	import { toggleMode } from 'mode-watcher';
+	import { appConfig } from '$lib/constants';
 
 </script>
 
@@ -82,7 +83,7 @@
 		</div>
 	</main>
 	<footer class="mt-8 mb-3 flex justify-center">
-		<a href="https://github.com/csae8092/dboe-frontend">
+		<a href="{appConfig.code_repo_url}">
 			<Github class="h-10 w-10 text-muted-foreground dark:hover:text-white" />
 			<span class="sr-only">Link to code on GitHub</span>
 		</a>

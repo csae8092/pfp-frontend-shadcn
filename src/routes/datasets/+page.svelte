@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
 	import * as Card from '$lib/components/ui/card/index.js';
     import Button from '$lib/components/ui/button/button.svelte';
 	let { data } = $props();

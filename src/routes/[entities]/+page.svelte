@@ -1,11 +1,15 @@
 <script>
 	// @ts-nocheck
-
 	let { data, params } = $props();
+	import { goto } from '$app/navigation';
 	import MyBreadcrumb from '$lib/components/my-breadcrumb.svelte';
 	import EntityTypeIcon from '$lib/components/entity-type-icon.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
+	import * as Pagination from '$lib/components/ui/pagination/index.js';
+	import { page as pageStore } from '$app/state';
+
+	let url = $derived(pageStore.url);
 </script>
 
 <svelte:head>
@@ -21,6 +25,52 @@
 			<div>{data.label}</div>
 		</div>
 	</h1>
+</div>
+<div class="pb-5">
+	<Pagination.Root perPage={data.payload.size} count={data.payload.total} page={data.payload.page}>
+		{#snippet children({ pages, currentPage })}
+			<Pagination.Content>
+				<Pagination.Item>
+					<Pagination.Previous
+						onclick={() => {
+							const params = new URLSearchParams(url.searchParams);
+							params.set('page', String(currentPage - 1));
+							goto(`${url.pathname}?${params}`);
+						}}
+					></Pagination.Previous>
+				</Pagination.Item>
+				{#each pages as page (page.key)}
+					{#if page.type === 'ellipsis'}
+						<Pagination.Item>
+							<Pagination.Ellipsis />
+						</Pagination.Item>
+					{:else}
+						<Pagination.Item>
+							<a
+								href={`${url.pathname}?${new URLSearchParams({
+									...Object.fromEntries(url.searchParams),
+									page: page.value
+								})}`}
+							>
+								<Pagination.Link {page} isActive={currentPage === page.value}>
+									{page.value}
+								</Pagination.Link>
+							</a>
+						</Pagination.Item>
+					{/if}
+				{/each}
+				<Pagination.Item>
+					<Pagination.Next
+						onclick={() => {
+							const params = new URLSearchParams(url.searchParams);
+							params.set('page', String(currentPage + 1));
+							goto(`${url.pathname}?${params}`);
+						}}
+					></Pagination.Next>
+				</Pagination.Item>
+			</Pagination.Content>
+		{/snippet}
+	</Pagination.Root>
 </div>
 <div
 	class="grid min-w-full grid-cols-[repeat(auto-fit,minmax(380px,1fr))] justify-items-center gap-8"
