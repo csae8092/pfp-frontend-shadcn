@@ -28,7 +28,7 @@
 				<div class="flex justify-center items-center gap-x-1">
                     {#each Object.entries(data.entityConfig) as [key, value] (key)}
                         <div>
-                        <Button href={`/${value.link}?datasets=${x.uri}`} aria-label={ value.link}><EntityTypeIcon type={key} /> </Button>
+                        <Button href={`/${key}?datasets=${x.uri}`} aria-label={ value.link}><EntityTypeIcon type={key} /> </Button>
                     </div>
                     {/each}
 				</div>
