@@ -7,9 +7,12 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
 	import * as Pagination from '$lib/components/ui/pagination/index.js';
+	import { Input } from '$lib/components/ui/input/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
 	import { page as pageStore } from '$app/state';
 
 	let url = $derived(pageStore.url);
+	let labelValue = $derived(url.searchParams.get('label') || '');
 </script>
 
 <svelte:head>
@@ -26,6 +29,13 @@
 		</div>
 	</h1>
 </div>
+<form>
+<div class="flex max-w-2xl mx-auto items-center justify-center gap-2 p-3">
+	<label for="label-input">Label</label>
+	<Input id="label-input" type="input" name="label" placeholder="" bind:value={labelValue}/>
+	<Button type="submit" variant="outline">Search</Button>
+</div>
+</form>
 <div class="pb-5">
 	<Pagination.Root perPage={data.payload.size} count={data.payload.total} page={data.payload.page}>
 		{#snippet children({ pages, currentPage })}
