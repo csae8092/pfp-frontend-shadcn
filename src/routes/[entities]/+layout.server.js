@@ -25,6 +25,6 @@ export async function load({ fetch, params, url }) {
         payload["previous_page"] = `${url.origin}${url.pathname}?${prevParams.toString()}`;
     }
     payload["fetch_data_url"] = fetch_data_url
-    console.log(payload)
+    // console.log(payload)
 	return { label, payload, entity  };
 }
