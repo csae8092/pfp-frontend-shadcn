@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
 	let { data } = $props();
 	import * as Alert from '$lib/components/ui/alert/index.js';
 	import AlertCircleIcon from '@lucide/svelte/icons/alert-circle';

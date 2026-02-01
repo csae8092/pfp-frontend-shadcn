@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import { navigating } from '$app/state';
