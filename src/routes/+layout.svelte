@@ -11,6 +11,7 @@
 	import SunIcon from '@lucide/svelte/icons/sun';
 	import MoonIcon from '@lucide/svelte/icons/moon';
 	import EntityTypeIcon from '$lib/components/entity-type-icon.svelte';
+	import MyTopLoadingBar from '$lib/components/my-top-loading-bar.svelte';
 
 	import { toggleMode } from 'mode-watcher';
 	import { appConfig } from '$lib/constants';
@@ -24,7 +25,7 @@
 	<title>PFP</title>
 </svelte:head>
 {#if isNavigating}
-	<div class="progress"></div>
+	<MyTopLoadingBar></MyTopLoadingBar>
 {/if}
 <div class="flex min-h-screen flex-col">
 	<header class="sticky top-0 z-50 bg-background">
@@ -94,27 +95,3 @@
 		</a>
 	</footer>
 </div>
-
-<style>
-	.progress {
-		position: fixed;
-		top: 0;
-		left: 0;
-		height: 3px;
-		width: 100%;
-		/* Use CSS variables for color stops to match theme */
-		background: linear-gradient(90deg, var(--foreground) 0%, var(--primary) 50%, var(--foreground) 100%);
-		background-size: 200% 100%;
-		animation: move 1s linear infinite;
-		z-index: 1000;
-	}
-
-	@keyframes move {
-		from {
-			background-position: 0% 0;
-		}
-		to {
-			background-position: 200% 0;
-		}
-	}
-</style>
