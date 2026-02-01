@@ -1,6 +1,9 @@
+// @ts-nocheck
 import { appConfig, entityConfig } from '$lib/constants.js';
 
 let base_url = appConfig.base_url;
+let errors = [];
+let datasets = []
 
 export async function load({ fetch, params }) {
 	let stats = [
@@ -40,8 +43,16 @@ export async function load({ fetch, params }) {
 			description: "Data providers."
 		}
 	];
-	const res = await fetch(`${base_url}datasets`);
-	const datasets = await res.json();
-
-	return { datasets: datasets, count: Object.keys(datasets).length, stats: stats, entityConfig:entityConfig };
+	try {
+		const res = await fetch(`${base_url}datasets`);
+		if (!res.ok) {
+			errors.push("Server Issue")
+		}
+		datasets = await res.json();
+	} catch (error) {
+		console.error("Fetch failed:", error);
+		errors.push(error)
+	}
+	console.log(errors)
+	return { datasets: datasets, count: Object.keys(datasets).length, stats: stats, entityConfig:entityConfig, errors: errors };
 }

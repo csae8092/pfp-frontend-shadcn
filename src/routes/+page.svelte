@@ -1,7 +1,10 @@
 <script>
 	let { data } = $props();
-    import ClassesOverview from '$lib/components/classes-overview.svelte';
+	import * as Alert from '$lib/components/ui/alert/index.js';
+	import AlertCircleIcon from '@lucide/svelte/icons/alert-circle';
+	import ClassesOverview from '$lib/components/classes-overview.svelte';
 	import MyBreadcrumb from '$lib/components/my-breadcrumb.svelte';
+	import MyErrorAlert from '$lib/components/my-error-alert.svelte';
 </script>
 
 <svelte:head>
@@ -18,4 +21,8 @@
 		Austrian Biographical Dictionary are integrated.
 	</p>
 </div>
-<ClassesOverview stats={data.stats}></ClassesOverview>
+{#if data.errors.length > 0}
+	<MyErrorAlert errors={data.errors}></MyErrorAlert>
+	{:else}
+	<ClassesOverview stats={data.stats}></ClassesOverview>
+{/if}
