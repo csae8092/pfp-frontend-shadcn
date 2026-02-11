@@ -1,7 +1,7 @@
 <script>
 	// @ts-nocheck
 	let { data, params } = $props();
-	import { goto } from '$app/navigation';
+	import { goto, preloadData } from '$app/navigation';
 	import MyBreadcrumb from '$lib/components/my-breadcrumb.svelte';
 	import EntityTypeIcon from '$lib/components/entity-type-icon.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
@@ -30,11 +30,11 @@
 	</h1>
 </div>
 <form>
-<div class="flex max-w-2xl mx-auto items-center justify-center gap-2 p-3">
-	<label for="label-input">Label</label>
-	<Input id="label-input" type="input" name="label" placeholder="" bind:value={labelValue}/>
-	<Button type="submit" variant="outline">Search</Button>
-</div>
+	<div class="mx-auto flex max-w-2xl items-center justify-center gap-2 p-3">
+		<label for="label-input">Label</label>
+		<Input id="label-input" type="input" name="label" placeholder="" bind:value={labelValue} />
+		<Button type="submit" variant="outline">Search</Button>
+	</div>
 </form>
 <div class="pb-5">
 	<Pagination.Root perPage={data.payload.size} count={data.payload.total} page={data.payload.page}>
@@ -42,6 +42,11 @@
 			<Pagination.Content>
 				<Pagination.Item>
 					<Pagination.Previous
+						onmouseenter={() => {
+							const params = new URLSearchParams(url.searchParams);
+							params.set('page', String(currentPage - 1));
+							preloadData(`${url.pathname}?${params}`);
+						}}
 						onclick={() => {
 							const params = new URLSearchParams(url.searchParams);
 							params.set('page', String(currentPage - 1));
@@ -71,6 +76,11 @@
 				{/each}
 				<Pagination.Item>
 					<Pagination.Next
+						onmouseenter={() => {
+							const params = new URLSearchParams(url.searchParams);
+							params.set('page', String(currentPage + 1));
+							preloadData(`${url.pathname}?${params}`);
+						}}
 						onclick={() => {
 							const params = new URLSearchParams(url.searchParams);
 							params.set('page', String(currentPage + 1));
