@@ -5,6 +5,7 @@
 	import EntityTypeIcon from '$lib/components/entity-type-icon.svelte';
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
 	import { getFirstSubdomain } from '$lib/myutils';
+	import { cidoc_mapping } from '$lib/constants';
 	let { data, params } = $props();
 
 	let entity_label = $derived(data.entityPayload.sources[0].label);
@@ -46,8 +47,8 @@
 	<h2 class="p-2 text-center text-muted-foreground">{data.entityPayload.uuid.split('/').at(-1)}</h2>
 	<h3 class="p-2 text-center text-2xl font-bold">Instances new</h3>
 
-	{#each Object.entries(data.events) as [eventType, eventItems]}
-		<h4>{eventType}</h4>
+	{#each Object.entries(data.events).filter(([eventType]) => eventType in cidoc_mapping) as [eventType, eventItems]}
+		<h4>{cidoc_mapping[eventType]}</h4>
 		<ul>
 			{#each eventItems as x}
 			<li><a href="{x.uuid}">{x.label}</a>, {x.date} ({x.source})</li>
@@ -60,7 +61,7 @@
 
 
 	
-	<h3 class="p-2 text-center text-2xl font-bold">Instances new</h3>
+	<h3 class="p-2 text-center text-2xl font-bold">Instances old</h3>
 	<Accordion.Root type="multiple">
 		{#each data.entityPayload.sources as source, i}
 			<Accordion.Item value={`item-${i}`}>

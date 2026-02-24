@@ -11,16 +11,15 @@ export async function load({ fetch, params, url }) {
     const events = /** @type {Record<string, any[]>} */ ({});
     for (const x of sources) {
         for (const y of x.events) {
+            const cidoc_class = y.rdf_class.class_uri
             const item = y.objects[0];
             item.date = y.date;
             item.source = y.event.split("//").slice(-1)[0].split(".")[0];
-            if (!events[y.type]) {
-                events[y.type] = [];
+            if (!events[cidoc_class]) {
+                events[cidoc_class] = [];
             }
-            events[y.type].push(item);
+            events[cidoc_class].push(item);
         }
     }
-    console.log(events)
-    // console.log(entityPayload.sources[0])
     return { fetch_data_url, entityPayload, events }
 }

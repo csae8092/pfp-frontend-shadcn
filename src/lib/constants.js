@@ -1,7 +1,7 @@
 export const appConfig = {
     title: "PFP-Frontend",
     title_short: "PFP",
-    base_url: "https://pfp-api.acdh-dev.oeaw.ac.at/",
+    base_url: "http://127.0.0.1:8000/",
     code_repo_url: "https://github.com/csae8092/pfp-frontend-shadcn"
 }
 
@@ -36,4 +36,11 @@ export const entityConfig = {
         link: "/datasets",
         entity: false
     },
+}
+
+
+export const cidoc_mapping = {
+    "http://www.cidoc-crm.org/cidoc-crm/P98_brought_into_life": "Birth",
+    "http://www.cidoc-crm.org/cidoc-crm/P100_was_death_of": "Death",
+    "http://www.cidoc-crm.org/cidoc-crm/P143i_was_joined_by": "Member"
 }
