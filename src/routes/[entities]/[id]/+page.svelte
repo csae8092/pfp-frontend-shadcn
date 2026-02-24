@@ -6,6 +6,7 @@
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
 	import { getFirstSubdomain } from '$lib/myutils';
 	import { cidoc_mapping } from '$lib/constants';
+	import { isLabeledStatement } from 'typescript';
 	let { data, params } = $props();
 
 	let entity_label = $derived(data.entityPayload.sources[0].label);
@@ -45,23 +46,23 @@
 		</div>
 	</h1>
 	<h2 class="p-2 text-center text-muted-foreground">{data.entityPayload.uuid.split('/').at(-1)}</h2>
-	<h3 class="p-2 text-center text-2xl font-bold">Instances new</h3>
-
-	{#each Object.entries(data.events).filter(([eventType]) => eventType in cidoc_mapping) as [eventType, eventItems]}
-		<h4>{cidoc_mapping[eventType]}</h4>
-		<ul>
-			{#each eventItems as x}
-			<li><a href="{x.uuid}">{x.label}</a>, {x.date} ({x.source})</li>
-			{/each}
-		</ul>
-
-	{/each}
+	
+	<h3 class="ps-2 text-2xl font-bold">Labels</h3>
+	<div class="ps-2">{[...data.labels].sort().join('; ')}</div>
+	{#if data.events && Object.keys(data.events).length > 0}
+		<h3 class="ps-2 text-2xl font-bold">Events</h3>
+		{#each Object.entries(data.events) as [eventType, eventItems]}
+			<h4 class="font-bold p-2">{cidoc_mapping[eventType] ?? eventType}</h4>
+			<ul class="ps-2">
+				{#each eventItems as x}
+				<li class="ms-1"><a href="{x.uuid}">{x.label}</a>, {x.date} ({x.source})</li>
+				{/each}
+			</ul>
+		{/each}
+	{/if}
 
 	
-
-
-	
-	<h3 class="p-2 text-center text-2xl font-bold">Instances old</h3>
+	<h3 class="ps-2 text-center text-2xl font-bold">Instances old</h3>
 	<Accordion.Root type="multiple">
 		{#each data.entityPayload.sources as source, i}
 			<Accordion.Item value={`item-${i}`}>
