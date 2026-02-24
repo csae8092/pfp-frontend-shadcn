@@ -21,3 +21,9 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+bar.json
+foo.json
+out.json
+.python-version
+main.py
+pyproject.toml

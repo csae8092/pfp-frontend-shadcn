@@ -44,7 +44,23 @@
 		</div>
 	</h1>
 	<h2 class="p-2 text-center text-muted-foreground">{data.entityPayload.uuid.split('/').at(-1)}</h2>
-	<h3 class="p-2 text-center text-2xl font-bold">Instances</h3>
+	<h3 class="p-2 text-center text-2xl font-bold">Instances new</h3>
+
+	{#each Object.entries(data.events) as [eventType, eventItems]}
+		<h4>{eventType}</h4>
+		<ul>
+			{#each eventItems as x}
+			<li><a href="{x.uuid}">{x.label}</a>, {x.date} ({x.source})</li>
+			{/each}
+		</ul>
+
+	{/each}
+
+	
+
+
+	
+	<h3 class="p-2 text-center text-2xl font-bold">Instances new</h3>
 	<Accordion.Root type="multiple">
 		{#each data.entityPayload.sources as source, i}
 			<Accordion.Item value={`item-${i}`}>
@@ -56,9 +72,12 @@
 					{#if source.events?.length > 0}
 						{#each source.events as event}
 							<div>
-								{event.label}
-								{event.startDate}
-								{event.relatedPlace?.label}
+								{event.type}
+								{event.date}
+								{#each event.objects as x}
+								 {x.label}
+								{/each}
+								{event.objects[0].label}
 								{#each event.relatedEntity as relEnt, i}
 									<a href={`/groups/${relEnt.id_proxy}`}>{relEnt.label}</a>
 								{/each}
@@ -69,4 +88,6 @@
 			</Accordion.Item>
 		{/each}
 	</Accordion.Root>
+
+	
 </div>
