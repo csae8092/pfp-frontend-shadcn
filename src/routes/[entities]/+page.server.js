@@ -1,6 +1,5 @@
 import { entityConfig } from '$lib/constants.js';
 
-
 export async function load({ fetch, params, url }) {
     let query_string = new URLSearchParams(Object.fromEntries(url.searchParams));
     if (!query_string.has('size')) {

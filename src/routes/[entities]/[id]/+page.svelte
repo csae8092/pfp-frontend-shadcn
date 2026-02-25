@@ -3,8 +3,9 @@
 
 	import * as Breadcrumb from '$lib/components/ui/breadcrumb/index.js';
 	import EntityTypeIcon from '$lib/components/entity-type-icon.svelte';
-	import * as Accordion from '$lib/components/ui/accordion/index.js';
 	import { getFirstSubdomain } from '$lib/myutils';
+	import { cidoc_mapping } from '$lib/constants.js';
+	import { isLabeledStatement } from 'typescript';
 	let { data, params } = $props();
 
 	let entity_label = $derived(data.entityPayload.sources[0].label);
@@ -44,29 +45,25 @@
 		</div>
 	</h1>
 	<h2 class="p-2 text-center text-muted-foreground">{data.entityPayload.uuid.split('/').at(-1)}</h2>
-	<h3 class="p-2 text-center text-2xl font-bold">Instances</h3>
-	<Accordion.Root type="multiple">
-		{#each data.entityPayload.sources as source, i}
-			<Accordion.Item value={`item-${i}`}>
-				<Accordion.Trigger
-					>{source.label} <small>{getFirstSubdomain(source.subject)}</small> Events: {source.events
-						?.length || 0}</Accordion.Trigger
-				>
-				<Accordion.Content>
-					{#if source.events?.length > 0}
-						{#each source.events as event}
-							<div>
-								{event.label}
-								{event.startDate}
-								{event.relatedPlace?.label}
-								{#each event.relatedEntity as relEnt, i}
-									<a href={`/groups/${relEnt.id_proxy}`}>{relEnt.label}</a>
-								{/each}
-							</div>
-						{/each}
-					{/if}
-				</Accordion.Content>
-			</Accordion.Item>
+	
+	<h3 class="ps-2 text-2xl font-bold">Labels</h3>
+	<div class="ps-2">{[...data.labels].sort().join('; ')}</div>
+
+	{#if data.events && Object.keys(data.events).length > 0}
+		<h3 class="ps-2 text-2xl font-bold">Events</h3>
+		{#each Object.entries(data.events) as [eventType, eventItems]}
+			<h4 class="font-bold ps-2">{cidoc_mapping[eventType] ?? eventType}</h4>
+			<ul class="ps-2">
+				{#each eventItems as x}
+					<li class="ms-1"><a href="{x.uuid}">{x.label}</a>, {x.date} ({x.source})</li>
+				{/each}
+			</ul>
 		{/each}
-	</Accordion.Root>
+	{/if}
+	<h3 class="ps-2 text-2xl font-bold">URIs</h3>
+	<div class="ps-2">
+		{data.uris.join("; ")}
+	</div>
+	
+
 </div>

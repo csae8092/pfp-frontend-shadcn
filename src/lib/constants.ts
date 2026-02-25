@@ -37,3 +37,10 @@ export const entityConfig = {
         entity: false
     },
 }
+
+
+export const cidoc_mapping = {
+    "http://www.cidoc-crm.org/cidoc-crm/P98_brought_into_life": "Birth",
+    "http://www.cidoc-crm.org/cidoc-crm/P100_was_death_of": "Death",
+    "http://www.cidoc-crm.org/cidoc-crm/P143i_was_joined_by": "Member"
+}

@@ -14,7 +14,7 @@
 	import MyTopLoadingBar from '$lib/components/my-top-loading-bar.svelte';
 
 	import { toggleMode } from 'mode-watcher';
-	import { appConfig } from '$lib/constants';
+	import { appConfig } from '$lib/constants.js';
 	const isNavigating = $derived(navigating.to !== null);
 </script>
 
