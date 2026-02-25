@@ -1,7 +1,7 @@
 export const appConfig = {
     title: "PFP-Frontend",
     title_short: "PFP",
-    base_url: "http://127.0.0.1:8000/",
+    base_url: "https://pfp-api.acdh-dev.oeaw.ac.at/",
     code_repo_url: "https://github.com/csae8092/pfp-frontend-shadcn"
 }
 

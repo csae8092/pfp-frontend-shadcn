@@ -7,11 +7,12 @@ export async function load({ fetch, params, url }) {
 
     const sources = Array.isArray(entityPayload?.sources) ? entityPayload.sources : [];
     const events: Record<string, unknown[]> = {};
-    const labels = new Set<string>();
+    let labels = new Set<string>();
+    const uris: string[] = [];
 
     for (const x of sources) {
         if (x?.label) labels.add(x.label);
-
+        uris.push(x.subject)
         const sourceEvents = Array.isArray(x?.events) ? x.events : [];
         for (const y of sourceEvents) {
             const cidoc_class: string = y?.rdf_class?.class_uri ?? 'unknown';
@@ -32,6 +33,5 @@ export async function load({ fetch, params, url }) {
             events[cidoc_class].push(item);
         }
     }
-
-    return { fetch_data_url, entityPayload, events, labels };
+    return { fetch_data_url, entityPayload, events, labels, uris };
 }
